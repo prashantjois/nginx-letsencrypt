@@ -2,7 +2,7 @@
 
 ## Introduction
 
-I have a container that has my application.
+I have a container that has runs my web application.
 
 It's a web application that I want reachable from the internet.
 

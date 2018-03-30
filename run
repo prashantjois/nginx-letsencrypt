@@ -1,11 +1,11 @@
 #!/bin/bash
 
-docker stop nginx-proxy 2>/dev/null
-docker rm nginx-proxy 2>/dev/null
+# Change this to where you want to save our certs
+CERTS_PATH="/docker/nginx/config/ssl/"
 
 docker run -d \
   --name nginx-proxy \
-  -v /docker/nginx/config/ssl/:/etc/nginx/certs:rw \
+  -v $CERTS_PATH:/etc/nginx/certs:rw \
   -v /etc/nginx/vhost.d \
   -v /usr/share/nginx/html \
   -v /var/run/docker.sock:/tmp/docker.sock:ro \
@@ -14,12 +14,9 @@ docker run -d \
   -p 443:443 \
   jwilder/nginx-proxy
 
-docker stop nginx-proxy-companion 2>/dev/null
-docker rm nginx-proxy-companion 2>/dev/null
-
 docker run -d \
     --name nginx-proxy-companion \
-    -v /docker/nginx/config/ssl/:/etc/nginx/certs:rw \
+    -v $CERTS_PATH:/etc/nginx/certs:rw \
     -v /var/run/docker.sock:/var/run/docker.sock:ro \
     --volumes-from nginx-proxy \
     jrcs/letsencrypt-nginx-proxy-companion
