@@ -37,6 +37,9 @@ To get up and running, all you need to do in your container is:
     * `-e LETSENCRYPT_HOST="example.com"`
     * `-e LETSENCRYPT_EMAIL="joe@example.com"`
 
+Make sure you run your own container ***AFTER*** the nginx containers. 
+The nginx containers listen for changes to the docker environment, if your container is already running then it will not detect it.
+
 ## Spell it out for me doc ...
 
 Here's a sample run command
